@@ -3,7 +3,8 @@
 import { usePrivy } from "@privy-io/react-auth";
 import { Button } from "konsta/react";
 
-export default function Join() {
+export default function Join({ params }: { params: { userType: string } }) {
+  const userType = params.userType;
   const { logout } = usePrivy();
 
   return (
