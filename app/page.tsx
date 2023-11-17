@@ -1,6 +1,7 @@
 "use client";
 
 import { Button, Link, Page } from "konsta/react";
+import { useTheme } from "next-themes";
 import { useContext } from "react";
 
 import { env } from "@/env.mjs";
@@ -15,6 +16,7 @@ const join = (path: "restaurant" | "user") => {
 
 export default function Home() {
   const { loading } = useContext(RavenContext);
+  const { theme } = useTheme();
 
   return (
     <Page>
@@ -31,7 +33,10 @@ export default function Home() {
             <div
               className={`${spaceGrotesk.className} flex flex-col items-center justify-center gap-2 text-center`}
             >
-              <img src="/icons/icon-192x192.png" alt="raven logo" />
+              <img
+                src={theme === "light" ? "/logo.png" : "/logo-dark.png"}
+                alt="raven logo"
+              />
               <div className="text-2xl">Raven</div>
             </div>
             <div className="flex flex-col items-center justify-center gap-5">

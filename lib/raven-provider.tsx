@@ -1,6 +1,6 @@
 import { SessionType, useSession } from "@lens-protocol/react-web";
 import { usePrivy } from "@privy-io/react-auth";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { initialState, Profile, RavenContext } from "./raven-context";
@@ -34,10 +34,10 @@ export function RavenProvider({ children }: { children: React.ReactNode }) {
 
   // logged out from Privy, redirect to home
   useEffect(() => {
-    if (ready && !authenticated && pathName !== "/") {
+    if (ready && !authenticated && pathName.length > 0 && pathName !== "/") {
       router.push("/");
     }
-  }, [ready, authenticated, router]);
+  }, [ready, authenticated, router, pathName]);
 
   return (
     <RavenContext.Provider

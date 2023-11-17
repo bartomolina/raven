@@ -21,9 +21,9 @@ import { polygonMumbai } from "viem/chains";
 import { env } from "@/env.mjs";
 import { APP_URL } from "@/lib/constants";
 import { bindings as privyBindings } from "@/lib/lens-privy-bindings";
+import { RavenProvider } from "@/lib/raven-provider";
 import { Notification, NotificationProvider } from "@/ui/common";
 import { isiOS } from "@/utils/ios";
-import { RavenProvider } from "@/lib/raven-provider";
 
 export const spaceGrotesk = Space_Grotesk({
   weight: ["400", "700"],
