@@ -81,6 +81,18 @@ export const createLensItem = async (
         // @ts-ignore
         type: "String",
       },
+      {
+        value: item.price,
+        key: "price",
+        // @ts-ignore
+        type: "String",
+      },
+      {
+        value: item.image,
+        key: "image",
+        // @ts-ignore
+        type: "String",
+      },
     ],
   });
 
