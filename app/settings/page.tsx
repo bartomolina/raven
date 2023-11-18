@@ -1,7 +1,6 @@
 "use client";
 
-import { SessionType, useLogout, useSession } from "@lens-protocol/react-web";
-import { ConnectedWallet, usePrivy, useWallets } from "@privy-io/react-auth";
+import { usePrivy } from "@privy-io/react-auth";
 import {
   BlockTitle,
   List,
@@ -11,62 +10,24 @@ import {
   Toggle,
 } from "konsta/react";
 import { useTheme } from "next-themes";
-import { useEffect, useMemo, useState } from "react";
 
-import { Button } from "@/ui/common";
+import { logout as lensLogout } from "@/lib/lens-client";
 import { Navigation } from "@/ui/layout";
 
 export default function Settings() {
-  const { user } = usePrivy();
-  const { wallets } = useWallets();
+  const { user, logout } = usePrivy();
   const { theme, setTheme } = useTheme();
-  const [connectedWallet, setConnectedWallet] = useState<
-    ConnectedWallet | undefined
-  >();
-  const { data: session, loading: loadingSession } = useSession();
-  const { execute: logout } = useLogout();
 
-  const signlessText = useMemo<
-    { text: string; loading: string } | undefined
-  >(() => {
-    if (
-      !loadingSession &&
-      session?.authenticated &&
-      session.type == SessionType.WithProfile
-    ) {
-      return session.profile.signless
-        ? {
-            text: "Disable signless transactions",
-            loading: "Disabling signless transactions",
-          }
-        : {
-            text: "Enable signless transactions",
-            loading: "Enabling signless transactions",
-          };
-    }
-  }, [loadingSession, session]);
-
-  useEffect(() => {
-    const wallet = wallets.find(
-      (wallet) => wallet.address === user?.wallet?.address
-    );
-    setConnectedWallet(wallet);
-  }, [wallets, user]);
-
-  useEffect(() => {
-    console.log("settings:user:", user);
-  }, [user]);
+  const signOut = async () => {
+    lensLogout();
+    await logout();
+  };
 
   return (
     <Page>
       <BlockTitle>Profile</BlockTitle>
       <List strong inset>
-        <ListButton onClick={() => logout()}>Log out</ListButton>
-        <Button
-          text={signlessText?.text}
-          textLoading={signlessText?.loading}
-          isFetching={loadingSession}
-        />
+        <ListButton onClick={signOut}>Log out</ListButton>
       </List>
       <BlockTitle>Theme</BlockTitle>
       <List strong inset>
@@ -88,11 +49,6 @@ export default function Settings() {
         <ListItem
           header="User Wallet Address"
           title={user?.wallet?.address}
-          titleWrapClassName="font-mono text-xs"
-        />
-        <ListItem
-          header="Connected Wallet"
-          title={connectedWallet?.address}
           titleWrapClassName="font-mono text-xs"
         />
       </List>

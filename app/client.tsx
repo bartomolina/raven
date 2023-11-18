@@ -1,26 +1,15 @@
 "use client";
 
-import {
-  development,
-  LensConfig,
-  LensProvider,
-} from "@lens-protocol/react-web";
-import {
-  ConnectedWallet,
-  PrivyProvider,
-  usePrivy,
-  useWallets,
-} from "@privy-io/react-auth";
+import { PrivyProvider } from "@privy-io/react-auth";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { App } from "konsta/react";
 import { Space_Grotesk } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { polygonMumbai } from "viem/chains";
 
 import { env } from "@/env.mjs";
 import { APP_URL } from "@/lib/constants";
-import { bindings as privyBindings } from "@/lib/lens-privy-bindings";
 import { RavenProvider } from "@/lib/raven-provider";
 import { Notification, NotificationProvider } from "@/ui/common";
 import { isiOS } from "@/utils/ios";
@@ -29,11 +18,6 @@ export const spaceGrotesk = Space_Grotesk({
   weight: ["400", "700"],
   subsets: ["latin"],
 });
-
-const lensConfig: LensConfig = {
-  bindings: privyBindings,
-  environment: development,
-};
 
 const queryClient = new QueryClient();
 
@@ -86,57 +70,23 @@ export function Client({ children }: { children: React.ReactNode }) {
           },
           appearance: {
             theme: "light",
-            logo: `${APP_URL}icons/icon-192x192.png`,
+            accentColor: "#000000",
+            logo: `${APP_URL}logo.png`,
           },
           defaultChain: polygonMumbai,
         }}
       >
-        <LensProvider config={lensConfig}>
-          <NotificationProvider>
-            <App theme={theme}>
-              <ThemeProvider attribute="class" enableSystem={false}>
-                <Notification />
-                <PrivyBind>
-                  <RavenProvider>{children}</RavenProvider>
-                </PrivyBind>
-              </ThemeProvider>
-            </App>
-          </NotificationProvider>
-        </LensProvider>
+        <NotificationProvider>
+          <App theme={theme}>
+            <ThemeProvider attribute="class" enableSystem={false}>
+              <Notification />
+              <RavenProvider>{children}</RavenProvider>
+            </ThemeProvider>
+          </App>
+        </NotificationProvider>
       </PrivyProvider>
     </QueryClientProvider>
   ) : (
     <></>
   );
-}
-
-function PrivyBind({ children }: { children: React.ReactNode }) {
-  const { wallets } = useWallets();
-  const { authenticated, ready, user } = usePrivy();
-
-  const connectedWallet = wallets.find(
-    (wallet) => wallet.address === user?.wallet?.address
-  );
-
-  const updateBindings = useCallback(async (wallet: ConnectedWallet) => {
-    try {
-      await wallet.switchChain(polygonMumbai.id);
-      const provider = await wallet.getEthersProvider();
-      const signer = provider.getSigner();
-      privyBindings.update({
-        signer,
-        provider,
-      });
-    } catch (error) {
-      console.error("privyBind:Failed to update bindings:", error);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (ready && authenticated && connectedWallet) {
-      updateBindings(connectedWallet);
-    }
-  }, [ready, authenticated, connectedWallet, updateBindings]);
-
-  return <>{children}</>;
 }

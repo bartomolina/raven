@@ -1,5 +1,6 @@
 "use client";
 
+import { usePrivy } from "@privy-io/react-auth";
 import { Button, Link, Page } from "konsta/react";
 import { useTheme } from "next-themes";
 import { useContext } from "react";
@@ -10,13 +11,15 @@ import { AddToHomeScreenAndroid, AddToHomeScreeniOS } from "@/ui/layout";
 
 import { spaceGrotesk } from "./client";
 
-const join = (path: "restaurant" | "user") => {
-  alert(`joining as ${path}`);
-};
-
 export default function Home() {
   const { loading } = useContext(RavenContext);
   const { theme } = useTheme();
+  const { login } = usePrivy();
+
+  const join = (type: "user" | "restaurant") => {
+    localStorage.setItem("userType", type);
+    login();
+  };
 
   return (
     <Page>
@@ -43,7 +46,7 @@ export default function Home() {
               <Button
                 large
                 onClick={() => join("user")}
-                className="!w-36 !bg-black normal-case dark:!bg-white dark:text-black"
+                className="!w-52 !bg-black normal-case dark:!bg-white dark:text-black"
               >
                 Join
               </Button>

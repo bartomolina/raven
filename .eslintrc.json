@@ -14,6 +14,7 @@
     "unicorn/prevent-abbreviations": "off",
     "unicorn/switch-case-braces": "off",
     "unicorn/numeric-separators-style": "off",
-    "import/named": "off"
+    "import/named": "off",
+    "unicorn/no-null": "off"
   }
 }

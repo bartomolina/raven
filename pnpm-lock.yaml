@@ -14,9 +14,6 @@ dependencies:
   '@lens-protocol/metadata':
     specifier: 1.0.0
     version: 1.0.0(zod@3.22.4)
-  '@lens-protocol/react-web':
-    specifier: 2.0.0-alpha.21
-    version: 2.0.0-alpha.21(@apollo/client@3.8.6)(@lens-protocol/metadata@1.0.0)(ethers@5.7.2)(react-dom@18.2.0)(react@18.2.0)
   '@phosphor-icons/react':
     specifier: ^2.0.13
     version: 2.0.13(react-dom@18.2.0)(react@18.2.0)
@@ -143,42 +140,6 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.19
-    dev: false
-
-  /@apollo/client@3.8.6(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-FnHg3vhQP8tQzgBs6oTJCFFIbovelDGYujj6MK7CJneiHf62TJstCIO0Ot4A1h7XrgFEtgl8a/OgajQWqrTuYw==}
-    peerDependencies:
-      graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
-      graphql-ws: ^5.5.5
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-      subscriptions-transport-ws: ^0.9.0 || ^0.11.0
-    peerDependenciesMeta:
-      graphql-ws:
-        optional: true
-      react:
-        optional: true
-      react-dom:
-        optional: true
-      subscriptions-transport-ws:
-        optional: true
-    dependencies:
-      '@graphql-typed-document-node/core': 3.2.0(graphql@16.8.1)
-      '@wry/context': 0.7.3
-      '@wry/equality': 0.5.6
-      '@wry/trie': 0.4.3
-      graphql: 16.8.1
-      graphql-tag: 2.12.6(graphql@16.8.1)
-      hoist-non-react-statics: 3.3.2
-      optimism: 0.17.5
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      response-iterator: 0.2.6
-      symbol-observable: 4.0.0
-      ts-invariant: 0.10.3
-      tslib: 2.6.2
-      zen-observable-ts: 1.2.5
     dev: false
 
   /@babel/code-frame@7.22.13:
@@ -1041,54 +1002,6 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  /@lens-protocol/api-bindings@0.11.0-alpha.19(@apollo/client@3.8.6)(ethers@5.7.2)(react@18.2.0):
-    resolution: {integrity: sha512-G9oCUGkc0gycDvFccqfXUNdF3vASX6gYL5340PIpk3U6EvwGGjKrY2QyU9MEUtYJqnpBNk+sZ0Y+/MvCSIXTig==}
-    peerDependencies:
-      '@apollo/client': ^3.8.5
-      '@faker-js/faker': ^7.6.0
-      jest-mock-extended: ^3.0.1
-      react: ^18.2.0
-    peerDependenciesMeta:
-      '@faker-js/faker':
-        optional: true
-      jest-mock-extended:
-        optional: true
-    dependencies:
-      '@apollo/client': 3.8.6(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
-      '@lens-protocol/domain': 0.11.0-alpha.14(ethers@5.7.2)
-      '@lens-protocol/shared-kernel': 0.11.0-alpha.8(ethers@5.7.2)
-      graphql: 16.8.1
-      graphql-tag: 2.12.6(graphql@16.8.1)
-      react: 18.2.0
-      tslib: 2.6.2
-    transitivePeerDependencies:
-      - '@jest/globals'
-      - ethers
-      - jest-when
-      - wait-for-expect
-    dev: false
-
-  /@lens-protocol/blockchain-bindings@0.10.0-alpha.14(ethers@5.7.2):
-    resolution: {integrity: sha512-AVEUUWu1FqO2B8wsKvDyfxIueDgNSYXb1pq9lHhZSB2GWzzbM+lUXt93TnqjrjXDlbb6EH13TBJEY9zRBevxCg==}
-    peerDependencies:
-      ethers: ^5.7.2
-    dependencies:
-      '@ethersproject/abi': 5.7.0
-      '@ethersproject/providers': 5.7.2
-      '@lens-protocol/domain': 0.11.0-alpha.14(ethers@5.7.2)
-      '@lens-protocol/shared-kernel': 0.11.0-alpha.8(ethers@5.7.2)
-      ethers: 5.7.2
-      tslib: 2.6.2
-    transitivePeerDependencies:
-      - '@faker-js/faker'
-      - '@jest/globals'
-      - bufferutil
-      - jest-mock-extended
-      - jest-when
-      - utf-8-validate
-      - wait-for-expect
-    dev: false
-
   /@lens-protocol/client@2.0.0-alpha.21(@lens-protocol/metadata@1.0.0)(ethers@5.7.2):
     resolution: {integrity: sha512-adoRZN+o/e53KxlhzbnKH9CLmetOUrLe3D2vq4A3NF0vAZkzVtzFOXVx9GVtmz6URd9pJUJGg3P08UknWjcYfw==}
     engines: {node: ^18.15.0}
@@ -1119,32 +1032,6 @@ packages:
       - ethers
       - lokijs
       - utf-8-validate
-    dev: false
-
-  /@lens-protocol/domain@0.11.0-alpha.14(ethers@5.7.2):
-    resolution: {integrity: sha512-8NKQ52nY5VSaDIdi3aQk/WonEsgsY6aqs+B1IN29Fsw0b/+dtLjf4Vk66Z7yHwwlC3hhB6rSw2AFLjkUvSvnUw==}
-    peerDependencies:
-      '@faker-js/faker': ^7.6.0
-      '@jest/globals': ^29.3.1
-      jest-mock-extended: ^3.0.1
-      jest-when: ^3.5.2
-      wait-for-expect: ^3.0.2
-    peerDependenciesMeta:
-      '@faker-js/faker':
-        optional: true
-      '@jest/globals':
-        optional: true
-      jest-mock-extended:
-        optional: true
-      jest-when:
-        optional: true
-      wait-for-expect:
-        optional: true
-    dependencies:
-      '@lens-protocol/shared-kernel': 0.11.0-alpha.8(ethers@5.7.2)
-      tslib: 2.6.2
-    transitivePeerDependencies:
-      - ethers
     dev: false
 
   /@lens-protocol/gated-content@0.3.3-alpha.15(@ethersproject/address@5.7.0)(@ethersproject/bignumber@5.7.0)(@ethersproject/contracts@5.7.0)(@ethersproject/hash@5.7.0)(@ethersproject/providers@5.7.2)(@ethersproject/wallet@5.7.0)(@lens-protocol/metadata@1.0.0)(ethers@5.7.2)(zod@3.22.4):
@@ -1198,82 +1085,6 @@ packages:
     dependencies:
       uuid: 9.0.1
       zod: 3.22.4
-    dev: false
-
-  /@lens-protocol/react-web@2.0.0-alpha.21(@apollo/client@3.8.6)(@lens-protocol/metadata@1.0.0)(ethers@5.7.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-RvPvLBRmcnYbsRzqS9LVnqIVbu9GX63Fu7iC+aOkgGfUCnzXHTOcxc9S+GzMyMdwTLzaCxXki00JDiVgquhVrA==}
-    peerDependencies:
-      '@lens-protocol/metadata': ^1.0.0
-      '@xmtp/react-sdk': '*'
-      ethers: ^5.7.2
-      react: ^18.2.0
-    peerDependenciesMeta:
-      '@xmtp/react-sdk':
-        optional: true
-    dependencies:
-      '@lens-protocol/api-bindings': 0.11.0-alpha.19(@apollo/client@3.8.6)(ethers@5.7.2)(react@18.2.0)
-      '@lens-protocol/domain': 0.11.0-alpha.14(ethers@5.7.2)
-      '@lens-protocol/metadata': 1.0.0(zod@3.22.4)
-      '@lens-protocol/react': 2.0.0-alpha.21(@lens-protocol/metadata@1.0.0)(ethers@5.7.2)(react-dom@18.2.0)(react@18.2.0)
-      '@lens-protocol/shared-kernel': 0.11.0-alpha.8(ethers@5.7.2)
-      '@lens-protocol/storage': 0.7.5-alpha.6(ethers@5.7.2)
-      ethers: 5.7.2
-      react: 18.2.0
-      tslib: 2.6.2
-    transitivePeerDependencies:
-      - '@apollo/client'
-      - '@faker-js/faker'
-      - '@jest/globals'
-      - bufferutil
-      - graphql-ws
-      - jest-mock-extended
-      - jest-when
-      - react-dom
-      - subscriptions-transport-ws
-      - utf-8-validate
-      - wait-for-expect
-    dev: false
-
-  /@lens-protocol/react@2.0.0-alpha.21(@lens-protocol/metadata@1.0.0)(ethers@5.7.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-wcHVrkUxMWswa6jTXGYY9vviVwE1v9XZOqvW8Ssmj/VWiHNaZakMFQy20+kyeoXxItuFDqggXLJNhp5fxwHwTQ==}
-    peerDependencies:
-      '@lens-protocol/metadata': ^1.0.0
-      ethers: ^5.7.2
-      react: ^18.2.0
-    dependencies:
-      '@apollo/client': 3.8.6(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
-      '@ethersproject/abstract-signer': 5.7.0
-      '@ethersproject/address': 5.7.0
-      '@ethersproject/bignumber': 5.7.0
-      '@ethersproject/contracts': 5.7.0
-      '@ethersproject/hash': 5.7.0
-      '@ethersproject/providers': 5.7.2
-      '@ethersproject/wallet': 5.7.0
-      '@lens-protocol/api-bindings': 0.11.0-alpha.19(@apollo/client@3.8.6)(ethers@5.7.2)(react@18.2.0)
-      '@lens-protocol/blockchain-bindings': 0.10.0-alpha.14(ethers@5.7.2)
-      '@lens-protocol/domain': 0.11.0-alpha.14(ethers@5.7.2)
-      '@lens-protocol/metadata': 1.0.0(zod@3.22.4)
-      '@lens-protocol/shared-kernel': 0.11.0-alpha.8(ethers@5.7.2)
-      '@lens-protocol/storage': 0.7.5-alpha.6(ethers@5.7.2)
-      ethers: 5.7.2
-      graphql: 16.8.1
-      jwt-decode: 3.1.2
-      lodash: 4.17.21
-      react: 18.2.0
-      tslib: 2.6.2
-      uuid: 9.0.1
-      zod: 3.22.4
-    transitivePeerDependencies:
-      - '@faker-js/faker'
-      - '@jest/globals'
-      - bufferutil
-      - graphql-ws
-      - jest-mock-extended
-      - jest-when
-      - react-dom
-      - subscriptions-transport-ws
-      - utf-8-validate
-      - wait-for-expect
     dev: false
 
   /@lens-protocol/shared-kernel@0.11.0-alpha.8(ethers@5.7.2):
@@ -2787,27 +2598,6 @@ packages:
     dependencies:
       '@walletconnect/window-getters': 1.0.1
       tslib: 1.14.1
-    dev: false
-
-  /@wry/context@0.7.3:
-    resolution: {integrity: sha512-Nl8WTesHp89RF803Se9X3IiHjdmLBrIvPMaJkl+rKVJAYyPsz1TEUbu89943HpvujtSJgDUx9W4vZw3K1Mr3sA==}
-    engines: {node: '>=8'}
-    dependencies:
-      tslib: 2.6.2
-    dev: false
-
-  /@wry/equality@0.5.6:
-    resolution: {integrity: sha512-D46sfMTngaYlrH+OspKf8mIJETntFnf6Hsjb0V41jAXJ7Bx2kB8Rv8RCUujuVWYttFtHkUNp7g+FwxNQAr6mXA==}
-    engines: {node: '>=8'}
-    dependencies:
-      tslib: 2.6.2
-    dev: false
-
-  /@wry/trie@0.4.3:
-    resolution: {integrity: sha512-I6bHwH0fSf6RqQcnnXLJKhkSXG45MFral3GxPaY4uAl0LYDZM+YDVDAiU9bYwjTuysy1S0IeecWtmq1SZA3M1w==}
-    engines: {node: '>=8'}
-    dependencies:
-      tslib: 2.6.2
     dev: false
 
   /JSONStream@1.3.5:
@@ -6574,14 +6364,6 @@ packages:
       mimic-fn: 2.1.0
     dev: false
 
-  /optimism@0.17.5:
-    resolution: {integrity: sha512-TEcp8ZwK1RczmvMnvktxHSF2tKgMWjJ71xEFGX5ApLh67VsMSTy1ZUlipJw8W+KaqgOmQ+4pqwkeivY89j+4Vw==}
-    dependencies:
-      '@wry/context': 0.7.3
-      '@wry/trie': 0.4.3
-      tslib: 2.6.2
-    dev: false
-
   /optionator@0.9.3:
     resolution: {integrity: sha512-JjCoypp+jKn1ttEFExxhetCKeJt9zhAgAve5FXHixTvFDW/5aEktX9bufBKLRRMdU7bNtpLfcGu94B3cdEJgjg==}
     engines: {node: '>= 0.8.0'}
@@ -7270,11 +7052,6 @@ packages:
       supports-preserve-symlinks-flag: 1.0.0
     dev: true
 
-  /response-iterator@0.2.6:
-    resolution: {integrity: sha512-pVzEEzrsg23Sh053rmDUvLSkGXluZio0qu8VT6ukrYuvtjVfCbDZH9d6PGXb8HZfzdNZt8feXv/jvUzlhRgLnw==}
-    engines: {node: '>=0.8'}
-    dev: false
-
   /restore-cursor@3.1.0:
     resolution: {integrity: sha512-l+sSefzHpj5qimhFSE5a8nufZYAM3sBSVMAPtYkmC+4EH2anSGaEMXSD0izRQbu9nfyQ9y5JrVmp7E8oZrUjvA==}
     engines: {node: '>=8'}
@@ -7782,11 +7559,6 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
 
-  /symbol-observable@4.0.0:
-    resolution: {integrity: sha512-b19dMThMV4HVFynSAM1++gBHAbk2Tc/osgLIBZMKsyqh34jb2e8Os7T6ZW/Bt3pJFdBTd2JwAnAAEQV7rSNvcQ==}
-    engines: {node: '>=0.10'}
-    dev: false
-
   /tailwindcss@3.3.2:
     resolution: {integrity: sha512-9jPkMiIBXvPc2KywkraqsUfbfj+dHDb+JPWtSJa9MLFdrPyazI7q6WX2sUrm7R9eVR7qqv3Pas7EvQFzxKnI6w==}
     engines: {node: '>=14.0.0'}
@@ -7926,13 +7698,6 @@ packages:
 
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
-
-  /ts-invariant@0.10.3:
-    resolution: {integrity: sha512-uivwYcQaxAucv1CzRp2n/QdYPo4ILf9VXgH19zEIjFx2EJufV16P0JtJVpYHy89DItG6Kwj2oIUjrcK5au+4tQ==}
-    engines: {node: '>=8'}
-    dependencies:
-      tslib: 2.6.2
-    dev: false
 
   /tsconfig-paths@3.14.2:
     resolution: {integrity: sha512-o/9iXgCYc5L/JxCHPe3Hvh8Q/2xm5Z+p18PESBU6Ff33695QnCHBEjcytY2q19ua7Mbl/DavtBOLq+oG0RCL+g==}
@@ -8621,16 +8386,6 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
-
-  /zen-observable-ts@1.2.5:
-    resolution: {integrity: sha512-QZWQekv6iB72Naeake9hS1KxHlotfRpe+WGNbNx5/ta+R3DNjVO2bswf63gXlWDcs+EMd7XY8HfVQyP1X6T4Zg==}
-    dependencies:
-      zen-observable: 0.8.15
-    dev: false
-
-  /zen-observable@0.8.15:
-    resolution: {integrity: sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==}
-    dev: false
 
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
