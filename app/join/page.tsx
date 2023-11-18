@@ -42,13 +42,18 @@ export default function Join() {
 
   const createProfileAndLogin = async () => {
     if (user?.email && user?.wallet) {
+      console.log("logging: start");
       const handle = safeHandle(formData.name);
       try {
         console.log("creating profile...");
         await createLensProfile(handle, user.wallet.address);
         console.log("created");
 
+        console.log("logging: fetch profile");
+
         const profile = await fetchProfile(handle);
+
+        console.log("logging: fetch restaurants from DB");
 
         await fetch("/api/restaurant", {
           method: "POST",
@@ -59,7 +64,9 @@ export default function Join() {
         });
 
         if (profile?.id) {
+          console.log("logging in");
           login(profile.id);
+          console.log("logged in");
         }
       } catch {
         console.log("error");
