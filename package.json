@@ -14,6 +14,7 @@
     "@lens-protocol/metadata": "1.0.0",
     "@phosphor-icons/react": "^2.0.13",
     "@privy-io/react-auth": "^1.47.2",
+    "@supabase/supabase-js": "^2.38.4",
     "@t3-oss/env-nextjs": "^0.7.1",
     "@tanstack/react-query": "4.36.1",
     "console-feed": "^3.5.0",

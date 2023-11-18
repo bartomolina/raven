@@ -2,7 +2,7 @@
 
 import { usePrivy } from "@privy-io/react-auth";
 import { Block, Button, List, ListInput, Page } from "konsta/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { useLensLogin } from "@/hooks";
 import {
@@ -10,6 +10,7 @@ import {
   fetchProfile,
   safeHandle,
 } from "@/lib/lens-functions";
+import { RavenContext } from "@/lib/raven-context";
 
 interface NewRestaurantForm {
   name: string;
@@ -25,9 +26,10 @@ export default function Join() {
     profileURI: "",
     address: "",
   });
-  const { user } = usePrivy();
+  const { user, logout } = usePrivy();
+  const { refetchProfile } = useContext(RavenContext);
   const { mutate: login } = useLensLogin({
-    onSuccess: () => console.log("success"),
+    onSuccess: () => refetchProfile(),
     onError: () => console.log("error"),
   });
 
@@ -42,10 +44,19 @@ export default function Join() {
     if (user?.email && user?.wallet) {
       const handle = safeHandle(formData.name);
       try {
-        console.log("try");
+        console.log("creating profile...");
         await createLensProfile(handle, user.wallet.address);
         console.log("created");
+
         const profile = await fetchProfile(handle);
+
+        await fetch("/api/restaurant", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            profileId: profile?.id,
+          }),
+        });
 
         if (profile?.id) {
           login(profile.id);
@@ -55,6 +66,8 @@ export default function Join() {
       }
     }
   };
+
+  const disabled = !formData.name || !formData.description || !formData.address;
 
   return (
     <Page>
@@ -94,17 +107,17 @@ export default function Join() {
       <div className="flex flex-col items-center justify-center gap-5">
         <Button
           large
+          disabled={disabled}
           onClick={createProfileAndLogin}
-          className="!w-52 !bg-black normal-case dark:!bg-white dark:text-black"
+          className="!w-52 !bg-black normal-case !text-white dark:!bg-white dark:text-black"
         >
           Join Raven
         </Button>
         <Button
           small
-          disabled={
-            !formData.name || !formData.description || !formData.address
-          }
-          onClick={createProfileAndLogin}
+          onClick={() => {
+            logout();
+          }}
           className="!w-52 !bg-white normal-case !text-black"
         >
           Back

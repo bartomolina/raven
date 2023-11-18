@@ -1,6 +1,6 @@
 "use client";
 
-import { Gear,Storefront } from "@phosphor-icons/react";
+import { Gear, Storefront } from "@phosphor-icons/react";
 import { Icon, Tabbar, TabbarLink } from "konsta/react";
 import { useRouter } from "next/navigation";
 
@@ -11,7 +11,7 @@ export function Navigation({ activeTab }: { activeTab: string }) {
     <Tabbar className="fixed bottom-0 left-0 h-24 pt-6">
       <TabbarLink
         active={activeTab === "restaurants"}
-        onClick={() => router.push("/restaurants")}
+        onClick={() => router.push("")}
         icon={
           <Icon
             ios={<Storefront size={28} />}

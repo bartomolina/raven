@@ -6,30 +6,61 @@ import { useProfile } from "@/hooks";
 
 import { initialState, Profile, RavenContext } from "./raven-context";
 
+const fetchRestaurants = async () => {
+  return await fetch("/api/restaurant", {
+    method: "GET",
+    headers: { Accept: "application/json" },
+  });
+};
+
 export function RavenProvider({ children }: { children: React.ReactNode }) {
   const [profile, setProfile] = useState<Profile | undefined>(
     initialState.profile
   );
   const [loading, setLoading] = useState(initialState.loading);
   const { ready, authenticated } = usePrivy();
-  const { data: lensProfile } = useProfile();
+  const { data: lensProfile, refetch } = useProfile();
   const router = useRouter();
   const pathName = usePathname();
 
-  // set profile type
+  const refetchProfile = async () => {
+    await refetch();
+  };
+
+  // set user type
   useEffect(() => {
     setLoading(true);
-    if (
-      lensProfile &&
-      (pathName === "/" || pathName === "/userLogin" || pathName === "/join")
-    ) {
-      setProfile({ type: "user" });
-      setLoading(false);
-      router.push("/restaurant");
+    if (ready && authenticated && lensProfile) {
+      fetchRestaurants().then((result) => {
+        result.json().then((data) => {
+          const isProfileInRestaurants = data.restaurants.some(
+            (restaurant: { profileId: string }) =>
+              restaurant.profileId === lensProfile.id
+          );
+          console.log("isRestaurant:", isProfileInRestaurants);
+          setProfile({ type: isProfileInRestaurants ? "restaurant" : "user" });
+        });
+      });
+    } else {
+      setProfile(initialState.profile);
     }
     setLoading(false);
-    setProfile(initialState.profile);
-  }, [lensProfile, router, pathName]);
+  }, [ready, authenticated, lensProfile]);
+
+  // user is logged in, redirect to relevant path
+  useEffect(() => {
+    if (
+      ready &&
+      authenticated &&
+      lensProfile &&
+      profile &&
+      (pathName === "/" || pathName === "/userLogin" || pathName === "/join")
+    ) {
+      profile.type === "restaurant"
+        ? router.push(`/restaurant/${lensProfile.id}`)
+        : router.push("/restaurants");
+    }
+  }, [lensProfile, router, pathName, ready, authenticated, profile]);
 
   // logged out from Privy, redirect to home
   useEffect(() => {
@@ -52,15 +83,13 @@ export function RavenProvider({ children }: { children: React.ReactNode }) {
     }
   }, [ready, authenticated, lensProfile, router, pathName]);
 
-  // logged in Lens, redirect to restaurants
-  useEffect(() => {}, []);
-
   return (
     <RavenContext.Provider
       value={{
         profile,
         setProfile,
         loading,
+        refetchProfile,
       }}
     >
       {children}

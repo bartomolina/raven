@@ -4,7 +4,6 @@ import { lensClient, logout } from "@/lib/lens-client";
 
 export const useProfile = () => {
   return useQuery({
-    queryKey: ["profile"],
     queryFn: async () => {
       try {
         const forProfileId = await lensClient.authentication.getProfileId();
