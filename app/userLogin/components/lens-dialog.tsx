@@ -107,7 +107,7 @@ export default function LensDialog({
             <BlockTitle medium>1. Copy your wallet address</BlockTitle>
             <Block strong outline>
               <p>
-                Tap on the address below to copy your <strong>quiz.tech</strong>{" "}
+                Tap on the address below to copy your <strong>Raven</strong>{" "}
                 wallet address
               </p>
               <List strong outlineIos>
@@ -128,8 +128,8 @@ export default function LensDialog({
             <BlockTitle medium>2. Link your account</BlockTitle>
             <Block strong outline>
               <p>
-                Tap below to open Orb and add your <strong>quiz.tech</strong>{" "}
-                wallet as a manager for your Lens profile
+                Tap below to open Orb and add your <strong>Raven</strong> wallet
+                as a manager for your Lens profile
               </p>
               <List strong outlineIos>
                 <Link
@@ -188,7 +188,7 @@ export default function LensDialog({
               {!managedProfiles?.items.length && (
                 <p>
                   Couldn&apos;t find any profiles linked to your{" "}
-                  <strong>quiz.tech</strong> wallet. Make sure you&apos;ve added
+                  <strong>Raven</strong> wallet. Make sure you&apos;ve added
                   your wallet as a Manager for your Lens profile. It may take a
                   few seconds after you&apos;ve updated the profile manager for
                   the profile to show up here!
