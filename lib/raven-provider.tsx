@@ -80,20 +80,21 @@ export function RavenProvider({ children }: { children: React.ReactNode }) {
       ready &&
       authenticated &&
       !lensProfile &&
+      !isLoading &&
       pathName.length > 0 &&
       pathName !== "/join" &&
       pathName !== "/userLogin"
     ) {
       const userType = localStorage.getItem("userType");
       console.log(userType);
-      // userType === "restaurant"
-      //   ? router.push("/join")
-      //   : router.push("/userLogin");
+      userType === "restaurant"
+        ? router.push("/join")
+        : router.push("/userLogin");
     }
-  }, [ready, authenticated, lensProfile, router, pathName]);
+  }, [ready, authenticated, lensProfile, isLoading, router, pathName]);
 
   useEffect(() => {
-    if (!lensProfile?.signless && connectedWallet) {
+    if (lensProfile && !lensProfile?.signless && connectedWallet) {
       enableProfileManager(connectedWallet);
     }
   }, [lensProfile, connectedWallet]);
