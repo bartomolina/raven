@@ -72,7 +72,6 @@ export const createLensItem = async (
     image: string;
   }
 ) => {
-  await enableProfileManager(connectedWallet);
   const metadata = textOnly({
     content: item.description,
     attributes: [

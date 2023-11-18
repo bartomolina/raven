@@ -9,7 +9,7 @@ import {
   NavbarBackLink,
   Page,
 } from "konsta/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { createLensItem } from "@/lib/lens-functions";
 
@@ -23,7 +23,6 @@ interface NewItemForm {
 const deleteItem = async () => {};
 
 export default function Item({ params }: { params: { id: string } }) {
-  console.log(params);
   const { wallets } = useWallets();
   const { user } = usePrivy();
   const [formData, setFormData] = useState<NewItemForm>({
@@ -50,6 +49,10 @@ export default function Item({ params }: { params: { id: string } }) {
       await createLensItem(connectedWallet, user?.wallet?.address, formData);
     }
   };
+
+  useEffect(() => {
+    console.log(params);
+  }, []);
 
   return (
     <Page>
