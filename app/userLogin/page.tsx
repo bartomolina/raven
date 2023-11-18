@@ -2,9 +2,12 @@
 
 import { usePrivy } from "@privy-io/react-auth";
 import { Block, Button, Page } from "konsta/react";
+import { useState } from "react";
 
 import { useLensLogin } from "@/hooks";
 import { lensClient } from "@/lib/lens-client";
+
+import LensDialog from "./components/lens-dialog";
 
 export default function UserLogin() {
   const { logout } = usePrivy();
@@ -13,6 +16,7 @@ export default function UserLogin() {
     onError: console.log,
   });
   const { user } = usePrivy();
+  const [lensPopupOpened, setLensPopupOpened] = useState(false);
 
   const createProfileAndLogin = async () => {
     if (user?.email && user?.wallet) {
@@ -44,6 +48,11 @@ export default function UserLogin() {
 
   return (
     <Page>
+      <LensDialog
+        lensPopupOpened={lensPopupOpened}
+        setLensPopupOpened={setLensPopupOpened}
+        address={"0x24eBE42660CC9656cdF2d89De9A91Da8fBD54eAF"}
+      />
       <div className="mt-10 flex justify-center">
         <img src="/lens-logo.png" alt="Lens Logo" />
       </div>
@@ -63,7 +72,7 @@ export default function UserLogin() {
         </Button>
         <Button
           large
-          onClick={createProfileAndLogin}
+          onClick={() => setLensPopupOpened(true)}
           className="!w-52 !bg-black normal-case dark:!bg-white dark:text-black"
         >
           Link an existing profile

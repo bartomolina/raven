@@ -22,16 +22,20 @@ export default function Restaurant({
   return (
     <Page>
       <div className="flex h-full flex-col">
-        <div className="flex h-32 w-full">
+        <div className="w-full">
           <div>
-            <img className="ml-7 mt-7 w-28" src="/logo-dark.png" alt="Logo" />
+            <img className="ml-7 mt-7 w-40" src="/demo/1.png" alt="Logo" />
           </div>
-          <div className="ml-7 mt-6 flex flex-col">
-            <div className="text-lg font-bold">Details</div>
-            <div>Test</div>
+          <div className="ml-7 mt-2 flex flex-col">
+            <div className="text-lg font-bold">BRUNCHIT</div>
+            <div className="pr-5 text-xs">
+              Brunchit is a foodie temple. An Atelier of magnificent brunches.
+              Fine Dining: excellent quality cuisine, high standards of service
+              and unique environments in exceptional locations.
+            </div>
           </div>
         </div>
-        <div className="h-full">
+        <div className="-mt-4 h-full">
           <List strongIos outlineIos>
             {menu?.items.map((item) => (
               <>
@@ -44,13 +48,25 @@ export default function Restaurant({
                         (item) => item.key === "name"
                       )?.value
                     }
-                    after="$15"
-                    subtitle="Beatles"
-                    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus."
+                    after={
+                      "$" +
+                      item.metadata.attributes?.find(
+                        (item) => item.key === "price"
+                      )?.value
+                    }
+                    text={
+                      item.metadata.attributes?.find(
+                        (item) => item.key === "description"
+                      )?.value
+                    }
                     media={
                       <img
                         className="material:w-10 material:rounded-full ios:w-20 ios:rounded-lg"
-                        src="https://cdn.framework7.io/placeholder/people-160x160-1.jpg"
+                        src={
+                          item.metadata.attributes?.find(
+                            (item) => item.key === "image"
+                          )?.value
+                        }
                         width="80"
                         alt="demo"
                       />
@@ -69,9 +85,6 @@ export default function Restaurant({
         textPosition="after"
         href="/item"
       />
-      {menu?.items.map((menuItem) => (
-        <div key={menuItem.id}>Menu Item: {menuItem.by.handle?.fullHandle}</div>
-      ))}
       <Navigation activeTab="restaurants" />
     </Page>
   );
