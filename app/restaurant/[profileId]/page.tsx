@@ -1,5 +1,6 @@
 "use client";
 
+import { AnyPublicationFragment } from "@lens-protocol/client";
 import { Plus } from "@phosphor-icons/react";
 import { Fab, List, ListItem, Page } from "konsta/react";
 
@@ -37,45 +38,52 @@ export default function Restaurant({
         </div>
         <div className="-mt-4 h-full">
           <List strongIos outlineIos>
-            {menu?.items.map((item) => (
-              <>
-                {item.__typename === "Post" && (
-                  <ListItem
-                    link
-                    href="/singleItem"
-                    chevronMaterial={false}
-                    title={
-                      item.metadata.attributes?.find(
-                        (item) => item.key === "name"
-                      )?.value
-                    }
-                    after={
-                      "$" +
-                      item.metadata.attributes?.find(
-                        (item) => item.key === "price"
-                      )?.value
-                    }
-                    text={
-                      item.metadata.attributes?.find(
-                        (item) => item.key === "description"
-                      )?.value
-                    }
-                    media={
-                      <img
-                        className="material:w-10 material:rounded-full ios:w-20 ios:rounded-lg"
-                        src={
-                          item.metadata.attributes?.find(
-                            (item) => item.key === "image"
-                          )?.value
-                        }
-                        width="80"
-                        alt="demo"
-                      />
-                    }
-                  />
-                )}
-              </>
-            ))}
+            {menu?.items
+              .filter(
+                (item: AnyPublicationFragment) =>
+                  "metadata" in item &&
+                  item.metadata.attributes?.find((attr) => attr.key === "price")
+                    ?.value !== "12"
+              )
+              .map((item) => (
+                <>
+                  {item.__typename === "Post" && (
+                    <ListItem
+                      link
+                      href="/singleItem"
+                      chevronMaterial={false}
+                      title={
+                        item.metadata.attributes?.find(
+                          (item) => item.key === "name"
+                        )?.value
+                      }
+                      after={
+                        "$" +
+                        item.metadata.attributes?.find(
+                          (item) => item.key === "price"
+                        )?.value
+                      }
+                      text={
+                        item.metadata.attributes?.find(
+                          (item) => item.key === "description"
+                        )?.value
+                      }
+                      media={
+                        <img
+                          className="material:w-10 material:rounded-full ios:w-20 ios:rounded-lg"
+                          src={
+                            item.metadata.attributes?.find(
+                              (item) => item.key === "image"
+                            )?.value
+                          }
+                          width="80"
+                          alt="demo"
+                        />
+                      }
+                    />
+                  )}
+                </>
+              ))}
           </List>
         </div>
       </div>

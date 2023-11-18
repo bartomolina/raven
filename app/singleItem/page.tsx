@@ -6,6 +6,7 @@ import {
   ActionsGroup,
   ActionsLabel,
   Button,
+  Notification,
   Page,
 } from "konsta/react";
 import { useState } from "react";
@@ -16,6 +17,7 @@ import { Navigation } from "@/ui/layout";
 export default function Restaurant() {
   const { data: profile } = useProfile();
   const [actionsOneOpened, setActionsOneOpened] = useState(false);
+  const [notificationFull, setNotificationFull] = useState(false);
 
   if (!profile) {
     return null;
@@ -52,6 +54,15 @@ export default function Restaurant() {
           </ActionsButton>
         </ActionsGroup>
       </Actions>
+      <Notification
+        opened={notificationFull}
+        icon={<img src="/logo-dark.png" className="h-5 w-5" />}
+        title="Raven"
+        titleRightText="now"
+        subtitle="Item ordered"
+        text="Your order will be on its way soon!"
+        onClick={() => setNotificationFull(false)}
+      />
       <div className="flex h-full flex-col">
         <div className="w-full">
           <div>
@@ -70,6 +81,7 @@ export default function Restaurant() {
             <Button
               large
               className="!w-52 !bg-black normal-case !text-white dark:!bg-white dark:text-black"
+              onClick={() => setNotificationFull(true)}
             >
               Order
             </Button>
