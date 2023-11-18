@@ -42,6 +42,7 @@ export default function Restaurant({
                 {item.__typename === "Post" && (
                   <ListItem
                     link
+                    href="/singleItem"
                     chevronMaterial={false}
                     title={
                       item.metadata.attributes?.find(
