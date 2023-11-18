@@ -1,9 +1,10 @@
-import { usePrivy } from "@privy-io/react-auth";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { useProfile } from "@/hooks";
 
+import { enableProfileManager } from "./lens-functions";
 import { initialState, Profile, RavenContext } from "./raven-context";
 
 const fetchRestaurants = async () => {
@@ -19,9 +20,15 @@ export function RavenProvider({ children }: { children: React.ReactNode }) {
   );
   const [loading, setLoading] = useState(initialState.loading);
   const { ready, authenticated } = usePrivy();
-  const { data: lensProfile, refetch } = useProfile();
+  const { data: lensProfile, isLoading, refetch } = useProfile();
   const router = useRouter();
   const pathName = usePathname();
+  const { wallets } = useWallets();
+  const { user } = usePrivy();
+
+  const connectedWallet = wallets.find(
+    (wallet) => wallet.address === user?.wallet?.address
+  );
 
   const refetchProfile = async () => {
     await refetch();
@@ -53,6 +60,7 @@ export function RavenProvider({ children }: { children: React.ReactNode }) {
       ready &&
       authenticated &&
       lensProfile &&
+      !isLoading &&
       profile &&
       (pathName === "/" || pathName === "/userLogin" || pathName === "/join")
     ) {
@@ -60,7 +68,7 @@ export function RavenProvider({ children }: { children: React.ReactNode }) {
         ? router.push(`/restaurant/${lensProfile.id}`)
         : router.push("/restaurants");
     }
-  }, [lensProfile, router, pathName, ready, authenticated, profile]);
+  }, [lensProfile, router, pathName, ready, authenticated, profile, isLoading]);
 
   // logged out from Privy, redirect to home
   useEffect(() => {
@@ -77,11 +85,18 @@ export function RavenProvider({ children }: { children: React.ReactNode }) {
       pathName !== "/userLogin"
     ) {
       const userType = localStorage.getItem("userType");
-      userType === "restaurant"
-        ? router.push("/join")
-        : router.push("/userLogin");
+      console.log(userType);
+      // userType === "restaurant"
+      //   ? router.push("/join")
+      //   : router.push("/userLogin");
     }
   }, [ready, authenticated, lensProfile, router, pathName]);
+
+  useEffect(() => {
+    if (!lensProfile?.signless && connectedWallet) {
+      enableProfileManager(connectedWallet);
+    }
+  }, [lensProfile, connectedWallet]);
 
   return (
     <RavenContext.Provider

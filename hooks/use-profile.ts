@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { lensClient, logout } from "@/lib/lens-client";
+import { lensClient } from "@/lib/lens-client";
 
 export const useProfile = () => {
   return useQuery({
@@ -12,7 +12,7 @@ export const useProfile = () => {
           return profile;
         }
       } catch {
-        logout();
+        // logout();
       }
       // eslint-disable-next-line unicorn/no-null
       return null;

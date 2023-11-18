@@ -99,7 +99,7 @@ export default function Join() {
           outline
           label="Address"
           type="text"
-          placeholder="Excact location"
+          placeholder="Exact location"
           value={formData.address}
           onChange={(e) => updateFormData(e, "address")}
         />

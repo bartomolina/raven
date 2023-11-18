@@ -15,6 +15,7 @@
     "unicorn/switch-case-braces": "off",
     "unicorn/numeric-separators-style": "off",
     "import/named": "off",
-    "unicorn/no-null": "off"
+    "unicorn/no-null": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
   }
 }

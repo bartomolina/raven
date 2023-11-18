@@ -1,4 +1,4 @@
-import { CheckCircle, WarningCircle,XCircle } from "@phosphor-icons/react";
+import { CheckCircle, WarningCircle, XCircle } from "@phosphor-icons/react";
 import { Notification as KonstaNotification } from "konsta/react";
 import { useContext } from "react";
 
